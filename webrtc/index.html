@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <video></video>
+    <audio></audio>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getUserMedia
+      navigator.mediaDevices
+        .getUserMedia({
+          video: true,
+          audio: true,
+        })
+        .then((stream) => {
+          // 输出结果看 ../asserts/MediaStream_MediaStreamTrack.png
+          console.log(
+            stream,
+            stream.getTracks(),
+            stream.getAudioTracks(),
+            stream.getVideoTracks()
+          );
+          // https://developer.mozilla.org/zh-CN/docs/Web/API/MediaStream/MediaStream
+          const video = document.querySelector("video");
+          // https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement/srcObject
+          // 注意srcObject属性的值要是一个 MediaStream，MediaSource，Blob 或者 File 对象（具体支持请参见兼容表）
+          //  如果写成video.srcObject = stream.getVideoTracks();是没有视频输出到video标签的
+          video.srcObject = new MediaStream(stream.getVideoTracks());
+          //  播放视频，或者可以给video标签添加 autoplay 属性
+          video.play();
+          const audio = document.querySelector("audio");
+          audio.srcObject = new MediaStream(stream.getAudioTracks());
+          //   播放音频，或者可以给audio标签添加 autoplay 属性
+          audio.play();
+        });
+    });
+  </script>
+</html>
