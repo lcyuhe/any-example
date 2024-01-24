@@ -1,0 +1,28 @@
+{
+  "appId": "co.electron.demo",
+  "asar": "true",
+  "productName": "Electron Demo",
+  "dmg": {
+    "sign": false
+  },
+  "mac": {
+    "category": "public.app-category.business",
+    "hardenedRuntime": true,
+    "gatekeeperAssess": false,
+    "entitlements": "./public/entitlements.mac.plist",
+    "entitlementsInherit": "./public/entitlements.mac.plist",
+    "extendInfo": {
+      "NSMicrophoneUsageDescription": "Electron Demo requires microphone access so that you can speak to the other people in the meeting.",
+      "NSCameraUsageDescription": "Electron Demo requires camera access so that the other people can see you in the meeting."
+    },
+    "icon": "icon/icon.icns"
+  },
+  "win": {
+    "icon": "icon/icon.ico"
+  },
+  "publish": {
+    "provider": "generic",
+    "url": "https://download.teamlink.co",
+    "channel": "latest-tl"
+  }
+}
